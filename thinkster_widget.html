@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            <h3>Thinkster Widget</h3>
+            <span id="labelText"></span>
+            <input type="text" id="userInput" onchange="email()">
+            <div id = "sublabel_input_6"></div>
+        </div>
+        <script type = 'text/javascript' src = 'thinkster_mail.js'></script>
+        <script type="text/javascript">
+
+            
+            //always subscribe to ready event and implement widget related code
+            //inside callback function , it is the best practice while developing widgets
+            JFCustomWidget.subscribe("ready", function(){
+                var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
+                document.getElementById('labelText').innerHTML = label;
+
+                //subscribe to form submit event
+                JFCustomWidget.subscribe("submit", function(){
+                    var data = {}
+                    if(result === "User Already Exist" || result === "Email address not valid."){
+                        data.valid = false;
+                    }
+                    else{
+                        data.valid = true;
+                    }
+                    data.value = document.getElementById('userInput').value
+                        //you should valid attribute to data for JotForm
+                        //to be able to use youw widget as required
+                    // send value to JotForm
+                    JFCustomWidget.sendSubmit(data);
+                    
+                });
+            });
+            
+        </script>
+    </body>
+</html>
