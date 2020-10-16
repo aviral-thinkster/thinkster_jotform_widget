@@ -48,7 +48,9 @@
                 //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function(){
                 var data = {}
-                if(result === "User Already Exist" || result === "Email address not valid."){
+                final = document.getElementById('userInput').value;
+
+                if(final === 'bajpaiaviral19@gmail.com'){
                     data.valid = false;
                 }
                 else{
