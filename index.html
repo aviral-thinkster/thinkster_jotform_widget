@@ -14,7 +14,6 @@
         <script type="text/javascript">
             var final;
             var result = "";
-            var valid = true;
             email = () => {
                 final = document.getElementById('userInput').value;
                 const url = "https://data-sandbox.tabtor.com/v1/users/validate?login=" + final;
@@ -27,14 +26,14 @@
                 .then(data => {
                 // console.log(data);
                 result = data.message;
-                if(data.message=="User Already Exist"){
-                valid = false;
+                if(data.message=="User Already Exist" || data.message=="Email address not valid."){
+                
                 document.getElementById("sublabel_input_6").style.color = "red";
                 document.getElementById("sublabel_input_6").innerText = data.message;
                 }
                 else {
                     document.getElementById("sublabel_input_6").style.color = "black";
-                    document.getElementById("sublabel_input_6").innerText = data.message;
+                    document.getElementById("sublabel_input_6").innerText = "example@example.com";
                 }
                 });
                 };
@@ -44,21 +43,28 @@
             JFCustomWidget.subscribe("ready", function(){
                 var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
                 document.getElementById('labelText').innerHTML = label;
+
+                JFCustomWidget.subscribe("submit", function(){
+                    var data = {}
+                    var result = document.getElementById("sublabel_input_6").innerText;
+                    if(result != "User Already Exist" && result != "Email address not valid." ){// || result == "Email address not valid."){
+                            data.valid = true;
+                        }
+                        else{
+                            data.valid = false;
+                        }
+                    
+                    data.value = document.getElementById('userInput').value
+                        //you should valid attribute to data for JotForm
+                        //to be able to use youw widget as required
+                        // send value to JotForm
+                    JFCustomWidget.sendSubmit(data);
+                
+                });
             });
             
                 //subscribe to form submit event
-            JFCustomWidget.subscribe("submit", function(){
-                var data = {}
-                final = document.getElementById('userInput').value;
-
-                data.valid = valid;
-                data.value = document.getElementById('userInput').value
-                    //you should valid attribute to data for JotForm
-                    //to be able to use youw widget as required
-                // send value to JotForm
-                JFCustomWidget.sendSubmit(data);
-                
-            });
+            
         </script>
     </body>
 </html>
