@@ -44,17 +44,16 @@
                 var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
                 document.getElementById('labelText').innerHTML = label;
             });
-            
+
                 //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function(){
                 var data = {}
-                // if(result === "User Already Exist" || result === "Email address not valid."){
-                //     data.valid = false;
-                // }
-                // else{
-                //     data.valid = true;
-                // }
-                data.valid = false;
+                if(result === "User Already Exist" || result === "Email address not valid."){
+                    data.valid = false;
+                }
+                else{
+                    data.valid = true;
+                }
                 data.value = document.getElementById('userInput').value
                     //you should valid attribute to data for JotForm
                     //to be able to use youw widget as required
@@ -62,8 +61,6 @@
                 JFCustomWidget.sendSubmit(data);
                 
             });
-            
-            
         </script>
     </body>
 </html>
