@@ -14,7 +14,7 @@
         <script type="text/javascript">
             var final;
             var result = "";
-
+            var valid = true;
             email = () => {
                 final = document.getElementById('userInput').value;
                 const url = "https://data-sandbox.tabtor.com/v1/users/validate?login=" + final;
@@ -28,6 +28,7 @@
                 // console.log(data);
                 result = data.message;
                 if(data.message=="User Already Exist"){
+                valid = false;
                 document.getElementById("sublabel_input_6").style.color = "red";
                 document.getElementById("sublabel_input_6").innerText = data.message;
                 }
@@ -44,19 +45,13 @@
                 var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
                 document.getElementById('labelText').innerHTML = label;
             });
-
+            
                 //subscribe to form submit event
             JFCustomWidget.subscribe("submit", function(){
                 var data = {}
                 final = document.getElementById('userInput').value;
 
-                // if(final === 'bajpaiaviral19@gmail.com'){
-                //     data.valid = false;
-                // }
-                // else{
-                //     data.valid = true;
-                // }
-                data.valid = true;
+                data.valid = valid;
                 data.value = document.getElementById('userInput').value
                     //you should valid attribute to data for JotForm
                     //to be able to use youw widget as required
