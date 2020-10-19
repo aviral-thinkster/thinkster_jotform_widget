@@ -45,7 +45,7 @@
             <h3>Email Address</h3>
             <span id="labelText"></span>
             <div>
-                <input type="text" id="userInput" onchange="email()">
+                <input type="text" id="userInput">
                 <div id="spinner"></div> 
             </div>
             <div id = "sublabel_input_6"></div>
@@ -65,7 +65,7 @@
 
             var final;
             var result = "";
-            email = () => {
+            email = (_callback) => {
                 final = document.getElementById('userInput').value;
                 const url = "https://data-sandbox.tabtor.com/v1/users/validate?login=" + final;
                 showSpinner();
@@ -87,6 +87,7 @@
                     document.getElementById("sublabel_input_6").innerText = "example@example.com";
                 }
                 });
+                _callback;
                 };
             
             //always subscribe to ready event and implement widget related code
@@ -96,6 +97,7 @@
                 document.getElementById('labelText').innerHTML = label;
 
                 JFCustomWidget.subscribe("submit", function(){
+                    email(() => {console.log('Api call complete')});
                     var data = {}
                     var result = document.getElementById("sublabel_input_6").innerText;
                     if(result != "User Already Exist" && result != "Email address not valid." ){// || result == "Email address not valid."){
