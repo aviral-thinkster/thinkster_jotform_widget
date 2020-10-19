@@ -89,15 +89,19 @@
                 });
                 
                 };
-            
+
+            async function submit(){
+                await email()
+            }
             //always subscribe to ready event and implement widget related code
             //inside callback function , it is the best practice while developing widgets
             JFCustomWidget.subscribe("ready", function(){
                 var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
                 document.getElementById('labelText').innerHTML = label;
 
+                
                 JFCustomWidget.subscribe("submit", function(){
-                    await email(() => {console.log('Api call complete')});
+                    submit();
                     var data = {}
                     var result = document.getElementById("sublabel_input_6").innerText;
                     if(result != "User Already Exist" && result != "Email address not valid." ){// || result == "Email address not valid."){
