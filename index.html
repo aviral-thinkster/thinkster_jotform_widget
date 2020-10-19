@@ -5,7 +5,7 @@
     </head>
     <body>
         
-        <!-- <style>
+         <style>
             #spinner{
             visibility: hidden;
             width: 80px;
@@ -37,7 +37,7 @@
             visibility: visible;
             }
             
-        </style> -->
+        </style>
 
 
 
@@ -46,7 +46,7 @@
             <span id="labelText"></span>
             <div>
                 <input type="text" id="userInput" onchange="email()">
-                <!-- <div id="spinner"></div>  -->
+                <div id="spinner"></div> 
             </div>
             <div id = "sublabel_input_6"></div>
         </div>
@@ -56,19 +56,19 @@
         <script type = 'text/javascript' src = 'thinkster_mail.js'></script>
         <script type="text/javascript">
 
-            // function showSpinner() {
-            //     spinner.className = "show";
-            //     setTimeout(() => {
-            //         spinner.className = spinner.className.replace("show", "");
-            //     }, 1000);
-            // }
+            function showSpinner() {
+                spinner.className = "show";
+                setTimeout(() => {
+                    spinner.className = spinner.className.replace("show", "");
+                }, 1000);
+            }
 
             var final;
             var result = "";
             email = () => {
                 final = document.getElementById('userInput').value;
                 const url = "https://data-sandbox.tabtor.com/v1/users/validate?login=" + final;
-                // showSpinner();
+                showSpinner();
                 fetch(url)
                 .then(response => response.json())
                 // .then(response => console.log(response))
