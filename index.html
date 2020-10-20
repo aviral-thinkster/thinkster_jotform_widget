@@ -4,12 +4,12 @@
         <script src="//js.jotform.com/JotFormCustomWidget.min.js"></script>
     </head>
     <body>
-        
-         <style>
+
+        <style>
             #spinner{
             visibility: hidden;
-            width: 80px;
-            height: 80px;
+            width: 30px;
+            height: 30px;
 
             border: 2px solid #f3f3f3;
             border-top:3px solid #f25a41;
@@ -42,20 +42,18 @@
 
 
         <div id="main">
-            <h3>Email Address</h3>
-            <!-- <span id="labelText"></span> -->
+            <p>Email Id</p>
+            <!-- <span id="labelText">Email</span> -->
             <div>
                 <input type="text" id="userInput" onchange="email()">
                 <div id="spinner"></div> 
             </div>
             <div id = "sublabel_input_6"></div>
         </div>
-
-
-
-        <!-- <script type = 'text/javascript' src = 'thinkster_mail.js'></script> -->
-        
+        <script type = 'text/javascript' src = 'thinkster_mail.js'></script>
         <script type="text/javascript">
+            var final;
+            var result = "";
 
             function showSpinner() {
                 spinner.className = "show";
@@ -64,28 +62,25 @@
                 }, 500);
             }
 
-            var final;
-            var result = "";
             email = () => {
                 final = document.getElementById('userInput').value;
-                const url = "https://data-sandbox.tabtor.com/v1/users/validate?login=" + final;
-                showSpinner();
+                const url = "api url" + final;
+                showSpinner()
+
                 fetch(url)
                 .then(response => response.json())
-                // .then(response => console.log(response))
                 // .then(data => result = data)
                 // );
                 // .then(data => console.log(data));
                 .then(data => {
-                // console.log(data);
-                if(data.message=="User Already Exist" || data.message=="Email address not valid."){
                 
+                if(data.message=="User Already Exist" || data.message=="Email address not valid."){
                 document.getElementById("sublabel_input_6").style.color = "red";
                 document.getElementById("sublabel_input_6").innerText = data.message;
                 }
                 else {
                     document.getElementById("sublabel_input_6").style.color = "black";
-                    document.getElementById("sublabel_input_6").innerText = "example@example.com";
+                    document.getElementById("sublabel_input_6").innerText = " ";
                 }
                 });
                 };
@@ -96,26 +91,25 @@
                 var label = JFCustomWidget.getWidgetSetting('QuestionLabel');
                 document.getElementById('labelText').innerHTML = label;
 
+                //subscribe to form submit event
                 JFCustomWidget.subscribe("submit", function(){
                     var data = {}
                     var result = document.getElementById("sublabel_input_6").innerText;
-                    if(result != "User Already Exist" && result != "Email address not valid." ){// || result == "Email address not valid."){
-                            data.valid = true;
-                        }
-                        else{
-                            data.valid = false;
-                        }
-                    
+                    if(result != "User Already Exist" && result != "Email address not valid." ){
+                        data.valid = true;
+                    }
+                    else{
+                        data.valid = false;
+                    }
+
                     data.value = document.getElementById('userInput').value
                         //you should valid attribute to data for JotForm
                         //to be able to use youw widget as required
-                        // send value to JotForm
+                    // send value to JotForm
                     JFCustomWidget.sendSubmit(data);
-                
+                    
                 });
             });
-            
-                //subscribe to form submit event
             
         </script>
     </body>
