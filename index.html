@@ -43,7 +43,7 @@
 
         <div id="main">
             <h3>Email Address</h3>
-            <span id="labelText"></span>
+            <!-- <span id="labelText"></span> -->
             <div>
                 <input type="text" id="userInput" onchange="email()">
                 <div id="spinner"></div> 
@@ -53,14 +53,15 @@
 
 
 
-        <script type = 'text/javascript' src = 'thinkster_mail.js'></script>
+        <!-- <script type = 'text/javascript' src = 'thinkster_mail.js'></script> -->
+        
         <script type="text/javascript">
 
             function showSpinner() {
                 spinner.className = "show";
                 setTimeout(() => {
                     spinner.className = spinner.className.replace("show", "");
-                }, 1000);
+                }, 500);
             }
 
             var final;
