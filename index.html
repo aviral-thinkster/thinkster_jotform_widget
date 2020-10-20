@@ -95,14 +95,13 @@
                 JFCustomWidget.subscribe("submit", function(){
                     var data = {}
                     var result = document.getElementById("sublabel_input_6").innerText;
-                    // if(result != "User Already Exist" && result != "Email address not valid." ){
-                    //     data.valid = true;
-                    // }
-                    // else{
-                    //     data.valid = false;
-                    // }
+                    if(result != "User Already Exist" && result != "Email address not valid." ){
+                        data.valid = true;
+                    }
+                    else{
+                        data.valid = false;
+                    }
 
-                    data.valid= true;
 
                     data.value = document.getElementById('userInput').value
                         //you should valid attribute to data for JotForm
